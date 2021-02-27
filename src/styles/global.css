@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap");
+
+pre code {
+	font-size: 0.95rem;
+	font-family: "Fira Code", monospace;
+	border-radius: 0.5rem !important;
+}
+p > code {
+	border-radius: 0.35rem !important;
+	color: #d63384 !important;
+	padding: 0.2rem 0.4rem !important;
+	font-family: "Fira Code", monospace;
+	font-size: 0.95rem;
+	background-color: none !important;
+	background: none !important;
+}
+pre {
+	border-radius: 0.5rem !important;
+}
+.gatsby-highlight .css-mpgjfc-Layout {
+	margin-bottom: 30em !important;
+}
+
+.code-copy-button {
+	border-radius: 0rem !important;
+	font-size: 0.7rem !important;
+	font-family: "Fira Code", monospace;
+	height: 1.8rem !important;
+	width: 5em;
+	margin-right: 1em;
+}
+
+.gatsby-highlight {
+	margin-bottom: 3em !important;
+	border-top-right-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+}
+.css-mpgjfc-Layout .gatsby-highlight pre::-webkit-scrollbar-track {
+	background-color: aliceblue !important;
+	height: 8px !important;
+}
+.css-mpgjfc-Layout .gatsby-highlight pre::-webkit-scrollbar-thumb {
+	width: auto !important;
+	height: 8px !important;
+	background-color: grey !important;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	padding: 5px 0 !important;
+}
+.code-title {
+	border-top-right-radius: 5px !important;
+	border-top-left-radius: 5px !important;
+}
+pre.prism-code.language-text::before,
+pre.prism-code.language-js::before,
+pre.prism-code.language-jsx::before,
+pre.prism-code.language-tsx::before,
+pre.prism-code.language-html::before,
+pre.prism-code.language-css::before {
+	background-color: rgba(255, 255, 255, 0.185) !important;
+	color: white !important;
+	border-radius: 0rem !important;
+	left: 1rem !important;
+	font-size: 0.7rem !important;
+	font-family: "Fira Code", monospace !important;
+	height: 1.5rem !important;
+	text-shadow: none !important;
+}
