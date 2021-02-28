@@ -1,13 +1,18 @@
-import React from "react"
-import styles from './index.module.css'
+import React, { useState } from "react";
 import { Button } from 'theme-ui'
+import './toggle.css'
 
 const Btn = () => {
+  const [isActive, setActive] = useState("false");
+  const handleToggle = () => { setActive(!isActive) };
   return (
     <div>
       <div className="row">
-        <div className="col">
-          <Button mr={2}>Beep</Button>
+        <Button variant='primary' mr={2} onClick={handleToggle}>Toggle</Button>
+        <div className={isActive ? "app" : null}>
+          <div className="card">
+            Change Ahead
+          </div>
 
         </div>
       </div>
