@@ -21,15 +21,6 @@ pre {
 	margin-bottom: 30em !important;
 }
 
-.code-copy-button {
-	border-radius: 0rem !important;
-	font-size: 0.7rem !important;
-	font-family: "Fira Code", monospace;
-	height: 1.8rem !important;
-	width: 5em;
-	margin-right: 1em;
-}
-
 .gatsby-highlight {
 	margin-bottom: 3em !important;
 	border-top-right-radius: 0 !important;
@@ -57,7 +48,7 @@ pre.prism-code.language-jsx::before,
 pre.prism-code.language-tsx::before,
 pre.prism-code.language-html::before,
 pre.prism-code.language-css::before {
-	background-color: rgba(255, 255, 255, 0.185) !important;
+	background-color: rgba(255, 255, 255, 0.075) !important;
 	color: white !important;
 	border-radius: 0rem !important;
 	left: 1rem !important;
@@ -65,4 +56,11 @@ pre.prism-code.language-css::before {
 	font-family: "Fira Code", monospace !important;
 	height: 1.5rem !important;
 	text-shadow: none !important;
+}
+.css-af5n79-Footer {
+	margin-top: auto;
+	margin-bottom: 0 !important;
+}
+.css-1jrqzhj {
+	height: 100vh;
 }
