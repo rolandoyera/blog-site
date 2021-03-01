@@ -41,6 +41,7 @@ pre {
 .code-title {
 	border-top-right-radius: 5px !important;
 	border-top-left-radius: 5px !important;
+	background-color: #c5cfff !important;
 }
 pre.prism-code.language-text::before,
 pre.prism-code.language-js::before,

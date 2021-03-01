@@ -4,11 +4,20 @@ import { tailwind } from "@theme-ui/presets"
 import './theme.css'
 
 export default merge(baseTheme, {
+  initialColorModeName: `light`,
+  useCustomProperties: true,
   colors: {
-    text: "#141a2c",
+    // primary: tailwind.colors.gray[7],
+    primary: `#98a4b5`,
+    secondary: `#5f6c80`,
+    toggleIcon: tailwind.colors.gray[8],
+    heading: tailwind.colors.black,
+    divide: tailwind.colors.gray[4],
     modes: {
       dark: {
         text: tailwind.colors.gray[4],
+        primary: tailwind.colors.gray[4],
+        secondary: `#7f8ea3`,
         toggleIcon: tailwind.colors.gray[4],
         background: `#141a2c`,
         heading: tailwind.colors.white,
@@ -26,7 +35,7 @@ export default merge(baseTheme, {
     },
     secondary: {
       color: 'white', bg: '#b8bfc5', paddingX: '4', paddingY: '2', fontSize: '1rem', cursor: 'pointer', borderWidth: '1px', borderStyle: 'solid',
-      borderColor: 'secondary', boxShadow: '0 0 0 0.25rem transparent', '&:hover': { bg: '#8b949c', borderColor: '#6c757d', },
+      borderColor: '#8b949c', boxShadow: '0 0 0 0.25rem transparent', '&:hover': { bg: '#8b949c', borderColor: '#6c757d', },
       '&:focus': { boxShadow: '0 0 0 0.25rem rgba(130, 138, 145, 0.4)', bg: '#8b949c', borderColor: '#b8bfc5', outline: 0, },
       '&:active': { boxShadow: '0 0 0 0.25rem rgba(130, 138, 145, 0.2)', bg: '#7d858c', borderColor: '#7d858c', outline: 0, },
     },

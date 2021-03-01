@@ -1,22 +1,15 @@
-
 import React from "react";
 import './index.css'
-import Button from 'theme-ui'
+import { Button } from 'theme-ui'
 
 
-const Btn = () => {
+const Btn = ({ children }) => {
 
   return (
     <div>
       <Button variant='secondary'>
-        Secondary
-</Button>
-
-      <div className="mt-5">
-
-        Testing Toggle
-
-      </div>
+        {children}
+      </Button>
     </div>
   )
 }
