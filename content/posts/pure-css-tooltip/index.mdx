@@ -8,66 +8,274 @@ import ToolTip from "./ToolTip";
 
 
 
-Tooltips have been one of those components that have flown under the radar for me. I've never given it much thought until I was working on a project recently and needed to use one. SEO was of upmost importance and after some fiddling around with it, I relized that they're not that many solid options to build one. After A LOT of research and rabbit holes, this is what I came up with:
-<br />
+Tooltips have been one of those components that have flown under the radar for me. I've never given it much thought until I was working on a project recently and needed to use one. After some fiddling around with trying to create one, I relized that they're not that many solid options to build one. After A LOT of research and rabbit holes, this is what I came up with:
+<br /><br />
 
 <ToolTip />
 
-<br />
+<br /><br />
 
-The awesome thing about these is that they're SEO friendly and use nothing but CSS. Have a look at the code:
+A pure css tooltip that does not use span tags. The problem with ```<span>``` tags is that they fall in line with the rest of your sentences and ruin your SEO. Well, I would imagine at least. A google bot doesn't know that your tooltip span tags are for a tooltip and that you know how to write complete sentences. Anyhow, these use a ```tooltip``` attribute that is nested inside the button tag. The awesome thing about these is that they're SEO friendly and use nothing but CSS. Have a look at the code:
 
 <br />
 
 ```html:title=src/index.html
-<button 
-  class="btn btn-primary" 
-    tooltip="Tooltip up here!" 
-      flow="up">
-        Up
-</button>
+<button class="btn btn-primary" tooltip="Tooltip up here!" flow="up">Up</button>
 ```
 <br />
 
-As you can see, the "tooltip" attribute holds the text and doesn't interfere with the document flow. Most tooltips require tags.
+As you can see, the "tooltip" attribute holds the text and doesn't interfere with the document flow. There's a lot of css involved, but if that doesn't bother you and you don't want to fiddle around with javascript, this is your tooltip. Here's the css:
 
-```jsx:title=src/components/post.jsx {5-7,10}
-import React from "react";
+```css:title=src/styles.css
 
-const Post = ({ data: { post } }) => (
-  <Layout>
-    <Heading variant="h2" as="h2">
-      {post.title}
-    </Heading>
-    <p
-      sx={{
-        color: `secondary`,
-        mt: 3,
-        a: { color: `secondary` },
-        fontSize: [1, 1, 2],
-      }}
-    >
-      <span>{post.date}</span>
-      {post.tags && (
-        <React.Fragment>
-          {` — `}
-          <ItemTags tags={post.tags} />
-        </React.Fragment>
-      )}
-    </p>
-    <section
-      sx={{
-        ...CodeStyles,
-        my: 5,
-        ".gatsby-resp-image-wrapper": { my: 5, boxShadow: `lg` },
-      }}
-    >
-      <MDXRenderer>{post.body}</MDXRenderer>
-    </section>
-  </Layout>
-);
+[tooltip] {
+	position: relative;
+	cursor: pointer;
+}
 
-export default Post;
+/* Applies to all tooltips */
+[tooltip]::before,
+[tooltip]::after {
+	text-transform: none;
+	font-size: 0.9em;
+	line-height: 1;
+	user-select: none;
+	pointer-events: none;
+	position: absolute;
+	display: none;
+	opacity: 0;
+}
+[tooltip]::before {
+	content: "";
+	border: 5px solid transparent;
+	z-index: 1001; /* absurdity 1 */
+}
+[tooltip]::after {
+	content: attr(tooltip); /* magic! */
+	text-align: center;
+	min-width: 3em;
+	max-width: 450px;
+	white-space: nowrap;
+	overflow: auto;
+	padding: 1.5ch 1.9ch;
+	border-radius: 0.3ch;
+	box-shadow: 0 1em 2em -0.5em rgba(14, 19, 29, 0.404);
+	background: rgb(45, 171, 255);
+	color: #ffffff;
+	z-index: 1000; /* absurdity 2 */
+}
+
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+	display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip=""]::before,
+[tooltip=""]::after {
+	display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+	bottom: 100%;
+	border-bottom-width: 0;
+	border-top-color: rgb(45, 171, 255);
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+	bottom: calc(100% + 5px);
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+	left: 50%;
+	transform: translate(-50%, -0.5em);
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+	top: 100%;
+	border-top-width: 0;
+	border-bottom-color: rgb(45, 171, 255);
+}
+[tooltip][flow^="down"]::after {
+	top: calc(100% + 5px);
+}
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+	left: 50%;
+	transform: translate(-50%, 0.5em);
+}
+
+/* FLOW: LEFT */
+[tooltip][flow^="left"]::before {
+	top: 50%;
+	border-right-width: 0;
+	border-left-color: rgb(45, 171, 255);
+	left: calc(0em - 5px);
+	transform: translate(-0.5em, -50%);
+}
+[tooltip][flow^="left"]::after {
+	top: 50%;
+	right: calc(100% + 5px);
+	transform: translate(-0.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+[tooltip][flow^="right"]::before {
+	top: 50%;
+	border-left-width: 0;
+	border-right-color: rgb(45, 171, 255);
+	right: calc(0em - 5px);
+	transform: translate(0.5em, -50%);
+}
+[tooltip][flow^="right"]::after {
+	top: 50%;
+	left: calc(100% + 5px);
+	transform: translate(0.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+	to {
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+}
+
+@keyframes tooltips-horz {
+	to {
+		opacity: 1;
+		transform: translate(0, -50%);
+	}
+}
+
+/* FX All The Things */
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+	animation: tooltips-vert 300ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after {
+	animation: tooltips-horz 300ms ease-out forwards;
+}
+
+/* Make the tooltips respond to focus */
+[tooltip]:focus::before,
+[tooltip]:focus::after {
+	display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip=""]::before,
+[tooltip=""]::after {
+	display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+	bottom: 100%;
+	border-bottom-width: 0;
+	border-top-color: rgb(45, 171, 255);
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+	bottom: calc(100% + 5px);
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+	left: 50%;
+	transform: translate(-50%, -0.5em);
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+	top: 100%;
+	border-top-width: 0;
+	border-bottom-color: rgb(45, 171, 255);
+}
+[tooltip][flow^="down"]::after {
+	top: calc(100% + 5px);
+}
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+	left: 50%;
+	transform: translate(-50%, 0.5em);
+}
+
+/* FLOW: LEFT */
+[tooltip][flow^="left"]::before {
+	top: 50%;
+	border-right-width: 0;
+	border-left-color: rgb(45, 171, 255);
+	left: calc(0em - 5px);
+	transform: translate(-0.5em, -50%);
+}
+[tooltip][flow^="left"]::after {
+	top: 50%;
+	right: calc(100% + 5px);
+	transform: translate(-0.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+[tooltip][flow^="right"]::before {
+	top: 50%;
+	border-left-width: 0;
+	border-right-color: rgb(45, 171, 255);
+	right: calc(0em - 5px);
+	transform: translate(0.5em, -50%);
+}
+[tooltip][flow^="right"]::after {
+	top: 50%;
+	left: calc(100% + 5px);
+	transform: translate(0.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+	to {
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+}
+
+@keyframes tooltips-horz {
+	to {
+		opacity: 1;
+		transform: translate(0, -50%);
+	}
+}
+
+/* FX All The Things */
+[tooltip]:not([flow]):focus::before,
+[tooltip]:not([flow]):focus::after,
+[tooltip][flow^="up"]:focus::before,
+[tooltip][flow^="up"]:focus::after,
+[tooltip][flow^="down"]:focus::before,
+[tooltip][flow^="down"]:focus::after {
+	animation: tooltips-vert 300ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:focus::before,
+[tooltip][flow^="left"]:focus::after,
+[tooltip][flow^="right"]:focus::before,
+[tooltip][flow^="right"]:focus::after {
+	animation: tooltips-horz 300ms ease-out forwards;
+}
 ```
 
 Code block without title:

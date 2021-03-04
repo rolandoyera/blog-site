@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap");
 
 pre code {
-	font-size: 0.95rem;
+	font-size: 1rem;
 	font-family: "Fira Code", monospace;
 	border-radius: 0.5rem !important;
 }
@@ -10,12 +10,15 @@ p > code {
 	color: #d63384 !important;
 	padding: 0.2rem 0.4rem !important;
 	font-family: "Fira Code", monospace;
-	font-size: 0.95rem;
+	font-size: 1rem;
 	background-color: none !important;
 	background: none !important;
 }
 pre {
-	border-radius: 0.5rem !important;
+	border-radius: 0.5rem;
+}
+pre.prism-code {
+	border-radius: 0 0 0.5rem 0.5rem !important;
 }
 .gatsby-highlight .css-mpgjfc-Layout {
 	margin-bottom: 30em !important;
@@ -58,10 +61,28 @@ pre.prism-code.language-css::before {
 	height: 1.5rem !important;
 	text-shadow: none !important;
 }
+
 .css-af5n79-Footer {
 	margin-top: auto;
 	margin-bottom: 0 !important;
 }
 .css-1jrqzhj {
 	height: 100vh;
+}
+
+p {
+	margin-bottom: 1.5rem;
+}
+h2 {
+	margin-bottom: -1rem !important;
+	margin-top: 3.5rem !important;
+}
+/*  DARK MODE  */
+
+/*  NavLinks Dark Mode */
+
+/* Social Links */
+
+.color {
+	color: rgba(165, 165, 165, 0.255);
 }

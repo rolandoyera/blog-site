@@ -1,0 +1,95 @@
+---
+title: What is a Javascript Object
+date: 2021-03-02
+description: Defence Against the Dark Arts (abbreviated as DADA) is a subject taught at Hogwarts School of Witchcraft and Wizardry and Ilvermorny School of Witchcraft and Wizardry. In this class, students study and learn how to defend themselves against all aspects of the Dark Arts, including dark creatures, curses, hexes and jinxes (dark charms), and duelling.
+tags:
+  - Javascript
+banner: ./banana.jpg
+---
+
+![banana Class](./banana.jpg)
+
+
+In simple terms, an ```object``` is a data type represented in the computing language of Javascript. An ```object``` can be used to store keyed <em>named values</em>, written as ```{ name: value }```, and can be scaled in complexity to define larger or more detailed "objects".
+
+Let's look at the syntax of a simple use case of an object: 
+
+
+```javascript:title=src/users.js
+let user = { 
+  name: "John Doe",
+  age: 48
+};
+```
+
+You define (and create) a JavaScript object with an object literal. Spaces and line breaks are not important so an object definition can span multiple lines.
+
+If you're still confused on what an object is, this next example may help. 
+
+## Real Life Objects, Properties, and Methods
+
+In real life, a car is an ```object```. A car has <strong>properties</strong> like weight, color, and <strong>methods</strong> like start and stop.
+
+All cars have the same properties, but the property values differ from car to car. All cars have the same methods, but the methods are performed at different times.
+
+```javascript:title=src/object.js
+let car = {
+  name:"Fiat",
+  model:"500",
+  color:"white",
+  weight:"850kg"
+};
+```
+Code block with only the title:
+
+```:title=src/utils/scream.js
+const scream = (input) => window.alert(input)
+```
+
+Code block with only the title but without lineNumbers:
+
+```:title=src/utils/scream.js noLineNumbers
+const scream = (input) => window.alert(input)
+```
+
+Line highlighting without code title:
+
+```js {2,4-5}
+const test = 3;
+const foo = "bar";
+const harry = "potter";
+const hermione = "granger";
+const ron = "weasley";
+```
+
+Here will `inline code` go, just inside the text. Wow!
+
+Code block without line numbers but with highlighting, language, and title:
+
+```tsx:title=src/components/blog.tsx {7-9,16} noLineNumbers
+import React from "react";
+
+const Blog = ({ posts }: PostsProps) => {
+  const { tagsPath, basePath } = useSiteMetadata();
+
+  return (
+    <Layout>
+      <Flex sx={{ alignItems: `center`, justifyContent: `space-between` }}>
+        <Heading variant="h2" as="h2">
+          Blog
+        </Heading>
+        <Styled.a
+          as={Link}
+          sx={{ variant: `links.secondary` }}
+          to={`/${basePath}/${tagsPath}`.replace(/\/\/+/g, `/`)}
+        >
+          View all tags
+        </Styled.a>
+      </Flex>
+      <Listing posts={posts} sx={{ mt: [4, 5] }} />
+    </Layout>
+  );
+};
+
+export default Blog;
+```
